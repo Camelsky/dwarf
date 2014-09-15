@@ -369,15 +369,16 @@ class AUstat():
                 )
             )
 
-    def customized_retained_list(self, fday, day_list=[]):
+    def customized_retained_list(self, base_day, day_list=[]):
         """
         the  day_list's retained number from fday to today
-        :param fday:
-        :param day_list: eg :[0,1,2,3,4,5,6,7,15,30]
+        :param base_day: the base day
+        :param day_list: eg :[datetime,datetime], should not contain base_day
         :return:
         """
-        dayList = [fday+timedelta(v) for v in day_list]
-        return zip(dayList, self._retained_value(dayList[0], day_list, 'dau'))
+        auBitmap = self.make_bitmap(base_day, 'dau')
+        return [(base_day, auBitmap.count())] + \
+               zip(day_list, self._retained_value(base_day, day_list, 'dau'))
 
     def get_month_retained(self, fday, tday):
         """
@@ -416,18 +417,16 @@ class AUstat():
                 )
             )
 
-    def customized_nu_retained_list(self, fday, day_list=[]):
+    def customized_nu_retained_list(self, base_day, day_list=[]):
         """
-        the  day_list's retained number from fday to today
-        :param fday:
-        :param day_list: eg :[0,1,2,3,4,5,6,7,15,30]
+        the day_list's retained number
+        :param base_day: the base day
+        :param day_list: eg :[datetime, datetime], should not contain base_day
         :return:
         """
-        dayList = [fday+timedelta(v) for v in day_list]
-        firstDay = dayList.pop(0)
-        nuBitmap = self.get_newuser_bitmap(firstDay)
-        return [[firstDay, nuBitmap.count()]] + zip(dayList,
-            self._retained_value(firstDay, dayList, 'dnu'))
+        nuBitmap = self.get_newuser_bitmap(base_day)
+        return [(base_day, nuBitmap.count())] + zip(day_list,
+                  self._retained_value(base_day, day_list, 'dnu'))
 
 
     def get_month_retained_nu(self, fday, tday):
