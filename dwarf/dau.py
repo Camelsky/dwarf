@@ -8,7 +8,6 @@ import time
 import logging
 from bitarray import bitarray
 from datetime import datetime, date, timedelta
-from tornado.options import define, options
 
 try:
     import dauconfig

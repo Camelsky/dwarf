@@ -3,4 +3,3 @@ bitarray
 tornado
 torndb
 MySQL-python
--e ./

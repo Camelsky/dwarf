@@ -3,7 +3,7 @@ import os
 
 setup(
     name = 'dwarf',
-    version = '${version}',
+	version = '0.1.2',
     url = 'https://github.com/Camelsky/dwarf.git',
     license = 'MIT',
     author = 'camelsky',

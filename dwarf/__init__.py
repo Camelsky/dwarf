@@ -3,4 +3,4 @@
 
 # from aubitmap import *
 
-version=r"0.1.1"
+version=r"0.1.2"
