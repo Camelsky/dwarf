@@ -70,7 +70,7 @@ class redisPipeline:
 
 
 def get_mysql():
-    conf = db_config.mysql_conf
+    conf = db_config.mysql_conf_pay
     conn = MySQLdb.connect(
         host=conf['host'],
         db=conf['db'],
