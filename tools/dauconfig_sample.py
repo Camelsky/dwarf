@@ -11,13 +11,6 @@ BITMAP_BLK_LEN      = 1000*1000*20
 BITMAP_BLK_PREFIX   = "%d-{key}"
 
 
-redis_conf = dict(
-    host  = "127.0.0.1",
-    port  = 6379,
-    db    = 15,
-    # max_connection = 1,
-)
-
 logfile_conf = dict(
     dir         = "/Users/Camel/snsLog/",
     name_format = "snsInfo-{date}.log.gz",
@@ -29,6 +22,8 @@ dau_keys_conf = dict(
     mau     = "sMau:{month}",
     dnu   = "sDnu:{date}",
     mnu   = "sMnu:{month}",
+    dru   = "sDru:{date}",
+    mru   = "sMru:{month}",
 )
 
 filter_keys_conf = dict(
@@ -37,13 +32,4 @@ filter_keys_conf = dict(
     version     = "sFversion:{version}",
     channel     = "sFchannel:{channel}",
     regu        = "sFregu:{regu}",
-)
-
-mysql_conf = dict(
-    host    = '127.0.0.1',
-    port    = 3306,
-    db      = 'dbname',
-    user    = 'username',
-    passwd  = 'password',
-    charset = 'utf8',
 )
