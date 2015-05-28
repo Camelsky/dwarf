@@ -84,11 +84,14 @@ def scan_tomcat_log(date):
             uids = []
             count = 0
             for line in f:
-                reg = re.search(fconf.log_pattern, line)
-                if reg:
-                    uids.append(reg.group(1))
+                # reg = re.search(fconf.log_pattern, line)
+                l = line.split()
+                # if reg:
+                if len(l)>11:
+                    # uids.append(reg.group(1))
+                    uids.append(l[10])
                     count += 1
-                    if count & 0xFFFF == 0:
+                    if count & 0xFFF == 0:
                         yield uids
                         uids = []
                         count = 0
@@ -111,7 +114,7 @@ def doScan(from_date, to_date):
     print from_date, to_date
     days        = (to_date-from_date).days+1
     dateList    = [from_date+timedelta(v) for v in range(days)] 
-    redis_cli   = get_redis_client(True)
+    redis_cli   = get_redis_client()
     auRecord = dwarf.daux.AUrecord(redis_cli)
     for date in dateList:
         sDate = date.strftime(config.DATE_FORMAT_R)

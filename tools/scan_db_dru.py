@@ -144,7 +144,7 @@ def run():
     logging.info("参数为：%s" % args)
 
     mysql_conn = get_mysql()
-    au_record = dwarf.daux.AUrecord(get_redis_client(pipe=True))
+    au_record = dwarf.daux.AUrecord(get_redis_client())
     do_map(args.from_date, args.to_date, au_record, mysql_conn)
 
 

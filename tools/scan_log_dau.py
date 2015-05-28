@@ -112,7 +112,7 @@ def doScan(from_date, to_date, port='9022'):
     print from_date, to_date
     days        = (to_date-from_date).days+1
     dateList    = [from_date+timedelta(v) for v in range(days)] 
-    redis_cli   = get_redis_client(True)
+    redis_cli   = get_redis_client()
     auRecord = dwarf.daux.AUrecord(redis_cli)
     for date in dateList:
         sDate = date.strftime(config.DATE_FORMAT)

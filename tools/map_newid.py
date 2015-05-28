@@ -240,7 +240,7 @@ def doMap(do, from_date, to_date, auRecord, mysql_conn):
     domap = {
         'gender': lambda:[auRecord.mapFilter('gender', v.gender, v.id) for v in getGenderUserid(from_date, mysql_conn)],
         'regu': lambda:[auRecord.mapFilter('regu', v.userinfo_status, v.user_id) for v in getRegUser(None, mysql_conn)],
-        'version': lambda:[auRecord.mapFilter('version', v.client_version, v.user_id) for v in getVersionUserid(from_date, mysql_conn)],
+        'version': lambda:[auRecord.mapFilter('version', (v.client_version or 'unknown').encode('utf-8'), v.user_id) for v in getVersionUserid(from_date, mysql_conn)],
         'uainfo': lambda:[(auRecord.mapFilter('platform', v['platform'], v['user_id']),
             auRecord.mapFilter('channel', v['channel'], v['user_id'])) for v in getUAuser(from_date, mysql_conn)],
         'nuid': lambda: [auRecord.mapNewUser(v['date'], v['id']) for v in getAllNewUserid(from_date,to_date, mysql_conn)],
