@@ -189,7 +189,7 @@ def run():
         for v in ret:
             for i in range(len(v)):
                 if isinstance(v[i], datetime):
-                    val = v[i].strftime(dwarf.dau_config.DATE_FORMAT_R) 
+                    val = v[i].strftime(dwarf.dau_conf.DATE_FORMAT_R) 
                 else: val = str(v[i])
                 sys.stdout.write(val)
                 sys.stdout.write(',')

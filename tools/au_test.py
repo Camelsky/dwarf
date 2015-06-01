@@ -10,6 +10,7 @@ import logging
 import tornado
 from tornado.options import options, define
 # import dauconfig
+import dwarf.dau_conf
 import dwarf.dau
 import dwarf.daux
 import db_config
@@ -34,9 +35,9 @@ def run():
     define('t', help="To date", default=None)
     options.parse_command_line()
     
-    bday = options.day and datetime.strptime(options.day, config.DATE_FORMAT) or datetime.today()
-    fday = options.f and datetime.strptime(options.f, config.DATE_FORMAT) or 0
-    tday = options.t and datetime.strptime(options.t, config.DATE_FORMAT) or 0
+    bday = options.day and datetime.strptime(options.day, dwarf.dau_conf.DATE_FORMAT) or datetime.today()
+    fday = options.f and datetime.strptime(options.f, dwarf.dau_conf.DATE_FORMAT) or 0
+    tday = options.t and datetime.strptime(options.t, dwarf.dau_conf.DATE_FORMAT) or 0
     redis_cli = get_redis_client()
 
   
