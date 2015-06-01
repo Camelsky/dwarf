@@ -9,13 +9,14 @@ from datetime import datetime, timedelta
 import logging  
 import tornado
 from tornado.options import options, define
-import dauconfig
+# import dauconfig
 import dwarf.dau
 import dwarf.daux
+import db_config
 
-config = dauconfig
+# config = dauconfig
 def get_redis_client(pipe=False):
-    conf = config.redis_conf
+    conf = db_config.redis_conf
     try:
         if pipe:
             conn = redisPipeline(conf)

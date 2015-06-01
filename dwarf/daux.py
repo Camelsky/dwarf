@@ -8,8 +8,8 @@ from datetime import datetime, timedelta
 
 import dau
 import util
-import dauconfig
-config = dauconfig
+import dau_conf
+config = dau_conf
 
 class dauxBase(object):
 
@@ -65,7 +65,7 @@ class AUstat(dauxBase):
             raise KeyError, 'have no cache server connection'
         self.baseDay = baseday
         self.cache_cli = cache_cli
-        self.config  = dauconfig
+        self.config  = dau_conf
         self.prefixs = self._keyprefix_chain()
         self.filters = filters
         self.is_cache = cache
@@ -196,7 +196,7 @@ class AUrecord(dauxBase):
 
     def __init__(self, redis_cli):
         self.cache_cli = redis_cli
-        self.config    = dauconfig
+        self.config    = dau_conf
         self.prefixs   = self._keyprefix_chain()
         self._ins_AUR  = self._init_aurecord()
 
@@ -248,12 +248,12 @@ class AUrecord(dauxBase):
 
 
 class auconfig():
-    DATETIME_FORMAT     = dauconfig.DATETIME_FORMAT
-    DATE_FORMAT         = dauconfig.DATE_FORMAT
-    MONTH_FORMAT        = dauconfig.MONTH_FORMAT
-    DATE_FORMAT_R       = dauconfig.DATE_FORMAT_R
-    STD_OFFSET          = dauconfig.STD_OFFSET
-    MAX_BITMAP_LENGTH   = dauconfig.MAX_BITMAP_LENGTH
+    DATETIME_FORMAT     = dau_conf.DATETIME_FORMAT
+    DATE_FORMAT         = dau_conf.DATE_FORMAT
+    MONTH_FORMAT        = dau_conf.MONTH_FORMAT
+    DATE_FORMAT_R       = dau_conf.DATE_FORMAT_R
+    STD_OFFSET          = dau_conf.STD_OFFSET
+    MAX_BITMAP_LENGTH   = dau_conf.MAX_BITMAP_LENGTH
 
     def __init__(self, dau_conf, filter_conf):
         self.dau_keys_conf    = dau_conf

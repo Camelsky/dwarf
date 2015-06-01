@@ -11,12 +11,14 @@ from datetime import datetime, timedelta
 import redis 
 import tornado
 from tornado.options import options, define
-import dauconfig
+# import dauconfig
+import db_config
 import dwarf
+import dwarf.dau_conf
 import dwarf.dau
 import dwarf.daux
 
-config    = dauconfig
+# config    = dauconfig
 class austat():
     def __init__(self, baseDay=None, filters=None):
         self.redis_cli = self._get_redis_client()
@@ -28,7 +30,7 @@ class austat():
 
     def _get_redis_client(self):
         "instance redis connection "
-        conf = config.redis_conf
+        conf = db_config.redis_conf
         conn = None
         try:
             conn = redis.Redis(**conf)
@@ -159,13 +161,13 @@ def run():
     define('filter', help="filtername", default=None)
     define('do', help="What need to do", default='dau')
     options.parse_command_line()
-    bday = options.day and datetime.strptime(options.day, config.DATE_FORMAT) or None
-    fday = options.f and datetime.strptime(options.f, config.DATE_FORMAT) or None
-    tday = options.t and datetime.strptime(options.t, config.DATE_FORMAT) or None
+    bday = options.day and datetime.strptime(options.day, dwarf.dau_conf.DATE_FORMAT) or None
+    fday = options.f and datetime.strptime(options.f, dwarf.dau_conf.DATE_FORMAT) or None
+    tday = options.t and datetime.strptime(options.t, dwarf.dau_conf.DATE_FORMAT) or None
     lfilter = options.filter and str.split(options.filter, ';') or []
     filters = None
     if lfilter:
-        redis_cli = redis.Redis(**config.redis_conf)
+        redis_cli = redis.Redis(**db_config.redis_conf)
         for v in lfilter:           
             name, vals = v.split('=')
             vals = vals.split(',')
@@ -187,7 +189,7 @@ def run():
         for v in ret:
             for i in range(len(v)):
                 if isinstance(v[i], datetime):
-                    val = v[i].strftime(config.DATE_FORMAT_R) 
+                    val = v[i].strftime(dwarf.dau_config.DATE_FORMAT_R) 
                 else: val = str(v[i])
                 sys.stdout.write(val)
                 sys.stdout.write(',')

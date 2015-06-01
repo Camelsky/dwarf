@@ -10,10 +10,10 @@ from bitarray import bitarray
 from datetime import datetime, date, timedelta
 
 try:
-    import dauconfig
+    import dau_conf
 except ImportError:
-    raise ImportError, ("Configure file 'dauconfig.py' "
-        "or module dauconfig was not found")
+    raise ImportError, ("Configure file 'dau_conf.py' "
+        "or module dau_conf was not found")
 from aubitmap import Bitmap
 import util
 
@@ -81,7 +81,7 @@ class AUstat():
         if not redis_cli:
             raise KeyError,'Redis connection not found'
         if not config:
-            self.config = dauconfig
+            self.config = dau_conf
         else:
             self.config = config
 
@@ -478,7 +478,7 @@ class Filter(Bitmap):
     def __init__(self, config=None, redis_cli=None):
         super(Filter, self).__init__()
         # logging.info('init Filter: config: %s', config and config.dau_keys_conf or '')        
-        self.config    = config or dauconfig
+        self.config    = config or dau_conf
         self.redis_cli = redis_cli
         self._cache = _Cache()
 
@@ -539,7 +539,7 @@ class AUrecord():
     def __init__(self, redis_cli, config=None):
         if not redis_cli:
             raise ValueError , "Need redis client but not found!"
-        self.config = config or dauconfig
+        self.config = config or dau_conf
         self.redis = redis_cli
 
     def mapActiveUserid(self, date, userid):
