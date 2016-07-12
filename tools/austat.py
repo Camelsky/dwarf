@@ -115,6 +115,24 @@ class austat():
             lDate.pop(0)
         return ret
 
+    def dnu_day_retained(self, from_date, to_date):
+        """
+        新增用户隔日留存
+        """
+        lDate = dwarf.util.list_day(fday=from_date, tday=to_date)
+        ret = [['firstdate']]
+        ret[0].extend(["0day", "+1 day"])
+        row = [lDate[0]]
+        if lDate:
+            fday = lDate[0]
+            tday = lDate[1] if len(lDate)>2 else lDate[0] 
+            lret = 
+                lret    = self.au.daily_nu_retained_list(fday, tday)
+                row.extend([v[1] for v in lret])
+            ret.append(row)
+            lDate.pop(0)
+        return ret
+
     def list_dau_30mu(self, from_date, to_date):
         lDau = self.dau_list(from_date, to_date)
         lmu  = [self._instance_au(v[0]).get_30days_mau() for v in lDau]
@@ -144,6 +162,7 @@ def do(value, As, fday, tday):
         'reau': lambda:As.dau_retained(fday,tday),
         'remau': lambda:As.mau_retained(fday, tday, 'mau'),
         'renu': lambda:As.dnu_retained(fday,tday),
+        'renu+1d': lambda:AS.dnu_day_retained(fday, tday),
         'remnu': lambda:As.mau_retained(fday, tday, 'mnu'),
         'daumau': lambda:As.list_dau_30mu(fday, tday),
         'dauwau': lambda:As.list_dau_7mu(fday, tday),
